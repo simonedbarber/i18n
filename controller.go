@@ -1,8 +1,8 @@
 package i18n
 
 import (
-	"github.com/qor/admin"
-	"github.com/qor/qor/utils"
+	"github.com/simonedbarber/admin"
+	"github.com/simonedbarber/qor/utils"
 )
 
 type i18nController struct {
@@ -18,9 +18,9 @@ func (controller *i18nController) Update(context *admin.Context) {
 	translation := Translation{Key: form.Get("Key"), Locale: form.Get("Locale"), Value: utils.HTMLSanitizer.Sanitize(form.Get("Value"))}
 
 	if err := controller.I18n.SaveTranslation(&translation); err == nil {
-		context.Writer.Write([]byte("OK"))
+		context.Execute("index", controller.I18n)
 	} else {
 		context.Writer.WriteHeader(422)
-		context.Writer.Write([]byte(err.Error()))
+		context.Execute("index", controller.I18n)
 	}
 }

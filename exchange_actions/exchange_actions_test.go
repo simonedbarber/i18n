@@ -7,17 +7,17 @@ import (
 	"testing"
 
 	"github.com/fatih/color"
-	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/qor/admin"
-	"github.com/qor/i18n"
-	"github.com/qor/i18n/backends/database"
-	"github.com/qor/i18n/exchange_actions"
-	"github.com/qor/media"
-	"github.com/qor/media/oss"
-	"github.com/qor/qor"
-	"github.com/qor/qor/test/utils"
-	"github.com/qor/worker"
+	"github.com/simonedbarber/admin"
+	"github.com/simonedbarber/i18n"
+	"github.com/simonedbarber/i18n/backends/database"
+	"github.com/simonedbarber/i18n/exchange_actions"
+	"github.com/simonedbarber/media"
+	"github.com/simonedbarber/media/oss"
+	"github.com/simonedbarber/qor"
+	"github.com/simonedbarber/qor/test/utils"
+	"github.com/simonedbarber/worker"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB

@@ -3,7 +3,6 @@ package i18n
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
@@ -11,17 +10,19 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/qor/admin"
-	"github.com/qor/cache"
-	"github.com/qor/cache/memory"
-	"github.com/qor/qor"
-	"github.com/qor/qor/resource"
-	"github.com/qor/qor/utils"
+	"github.com/simonedbarber/go-template/html/template"
+
+	"github.com/simonedbarber/admin"
+	"github.com/simonedbarber/cache"
+	"github.com/simonedbarber/cache/memory"
+	"github.com/simonedbarber/qor"
+	"github.com/simonedbarber/qor/resource"
+	"github.com/simonedbarber/qor/utils"
 	"github.com/theplant/cldr"
 )
 
 // Default default locale for i18n
-var Default = "en-US"
+var Default = "en"
 
 // I18n struct that hold all translations
 type I18n struct {
@@ -208,13 +209,13 @@ func RenderInlineEditAssets(isIncludeJQuery bool, isIncludeExtendAssetLib bool) 
 		}
 
 		if isIncludeExtendAssetLib {
-			if extendLib, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/qor/i18n/views/themes/i18n/inline-edit-libs.tmpl")); err == nil {
+			if extendLib, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/simonedbarber/i18n/views/themes/i18n/inline-edit-libs.tmpl")); err == nil {
 				content += string(extendLib)
 			} else {
 				hasError = true
 			}
 
-			if css, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/qor/i18n/views/themes/i18n/assets/stylesheets/i18n-inline.css")); err == nil {
+			if css, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/simonedbarber/i18n/views/themes/i18n/assets/stylesheets/i18n-inline.css")); err == nil {
 				content += fmt.Sprintf("<style>%s</style>", string(css))
 			} else {
 				hasError = true
@@ -222,7 +223,7 @@ func RenderInlineEditAssets(isIncludeJQuery bool, isIncludeExtendAssetLib bool) 
 
 		}
 
-		if js, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/qor/i18n/views/themes/i18n/assets/javascripts/i18n-inline.js")); err == nil {
+		if js, err := ioutil.ReadFile(filepath.Join(gopath, "src/github.com/simonedbarber/i18n/views/themes/i18n/assets/javascripts/i18n-inline.js")); err == nil {
 			content += fmt.Sprintf("<script type=\"text/javascript\">%s</script>", string(js))
 		} else {
 			hasError = true
@@ -413,7 +414,7 @@ func (i18n *I18n) ConfigureQorResource(res resource.Resourcer) {
 		router.Post(res.ToParam(), controller.Update, &admin.RouteConfig{Resource: res})
 		router.Put(res.ToParam(), controller.Update, &admin.RouteConfig{Resource: res})
 
-		res.GetAdmin().RegisterViewPath("github.com/qor/i18n/views")
+		res.GetAdmin().RegisterViewPath("github.com/simonedbarber/i18n/views")
 	}
 }
 
